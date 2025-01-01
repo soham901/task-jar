@@ -13,10 +13,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          # - platform: 'macos-latest' # for Arm-based Macs (M1 and above).
-          #   args: '--target aarch64-apple-darwin'
-          # - platform: 'macos-latest' # for Intel-based Macs.
-          #   args: '--target x86_64-apple-darwin'
           - platform: 'ubuntu-22.04' # For Linux builds.
             args: ''
           - platform: 'windows-latest' # For Windows builds.
@@ -51,6 +47,13 @@ jobs:
 
       - name: Install frontend dependencies
         run: yarn install # Replace with npm, pnpm, or bun as needed.
+
+      - name: Create Git Tag
+        id: create_tag
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          git tag "v$VERSION"
+          git push origin "v$VERSION"
 
       - name: Build and Publish with Tauri
         uses: tauri-apps/tauri-action@v0
