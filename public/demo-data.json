@@ -1,0 +1,83 @@
+[
+    {
+        "id": "AUTH-1",
+        "title": "Basic Authentication Setup",
+        "description": "Implement JWT-based authentication, login/logout functionality, authentication middleware, and error handling for invalid tokens.",
+        "priority": "P0",
+        "points": 8,
+        "phase": "Phase 1: Foundation",
+        "status": "To Do"
+    },
+    {
+        "id": "AUTH-2",
+        "title": "User Registration",
+        "description": "Develop a registration form with email verification, secure password storage using hashing, and initial role assignment (student/mentor).",
+        "priority": "P0",
+        "points": 5,
+        "phase": "Phase 1: Foundation",
+        "status": "To Do"
+    },
+    {
+        "id": "USER-1",
+        "title": "User Profiles",
+        "description": "Enable users to create and edit profiles, upload profile pictures, and set preferences for notifications.",
+        "priority": "P0",
+        "points": 5,
+        "phase": "Phase 1: Foundation",
+        "status": "To Do"
+    },
+    {
+        "id": "ROOM-1",
+        "title": "Study Room Creation",
+        "description": "Develop functionality for users to create virtual study rooms, set topics, invite participants, and schedule sessions.",
+        "priority": "P1",
+        "points": 8,
+        "phase": "Phase 2: Core Features",
+        "status": "To Do"
+    },
+    {
+        "id": "ROOM-2",
+        "title": "Study Room Management",
+        "description": "Allow users to view ongoing/archived rooms, search and filter rooms by topic, and manage room settings (e.g., privacy, rules).",
+        "priority": "P1",
+        "points": 5,
+        "phase": "Phase 2: Core Features",
+        "status": "To Do"
+    },
+    {
+        "id": "CHAT-1",
+        "title": "Real-Time Chat",
+        "description": "Integrate a real-time chat system for study rooms, support text formatting, and enable file sharing.",
+        "priority": "P2",
+        "points": 8,
+        "phase": "Phase 3: Enhanced Features",
+        "status": "To Do"
+    },
+    {
+        "id": "QUIZ-1",
+        "title": "Quiz Feature",
+        "description": "Develop a quiz creation tool for mentors, support multiple question types, time limits, and automatic grading.",
+        "priority": "P3",
+        "points": 13,
+        "phase": "Phase 4: Advanced Features",
+        "status": "To Do"
+    },
+    {
+        "id": "DASH-1",
+        "title": "Dashboard Analytics",
+        "description": "Provide users with insights like time spent in rooms, completed quizzes, and areas for improvement.",
+        "priority": "P3",
+        "points": 10,
+        "phase": "Phase 4: Advanced Features",
+        "status": "To Do"
+    },
+    {
+        "id": "PERF-1",
+        "title": "Performance Optimization",
+        "description": "Improve database query efficiency, implement caching for frequently accessed data, and optimize API response times.",
+        "priority": "P4",
+        "points": 13,
+        "phase": "Phase 5: Optimization",
+        "status": "To Do"
+    }
+]
