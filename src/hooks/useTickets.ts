@@ -116,6 +116,13 @@ export function useTickets() {
         setTickets(sortTickets(demoData));
     };
 
+    const handleDeleteAll = async () => {
+        if (window.confirm('Are you sure you want to delete all tickets?')) {
+            await db.deleteAllTickets();
+            window.location.reload();
+        }
+    };
+
     return {
         tickets,
         filteredTickets,
@@ -133,6 +140,7 @@ export function useTickets() {
         handleEdit,
         handleExport,
         handleImport,
+        handleDeleteAll,
         setShowForm,
         setShowDeleteDialog,
         setFilters,

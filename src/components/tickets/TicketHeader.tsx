@@ -1,7 +1,8 @@
 import React from 'react';
-import { Plus, Download, Upload } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ModeToggle } from '../mode-toggle';
+import { SettingsDrawer } from '../settings';
 
 interface TicketHeaderProps {
     totalCount: number;
@@ -14,8 +15,6 @@ interface TicketHeaderProps {
 export function TicketHeader({
     totalCount,
     filteredCount,
-    onExport,
-    onImport,
     onAddClick
 }: TicketHeaderProps) {
     return (
@@ -24,29 +23,12 @@ export function TicketHeader({
                 Tickets ({filteredCount} / {totalCount})
             </h1>
             <div className="flex gap-4">
-                <input
-                    type="file"
-                    id="import"
-                    className="hidden"
-                    accept=".json"
-                    onChange={onImport}
-                />
-                <label htmlFor="import">
-                    <Button variant="outline" className="cursor-pointer" asChild>
-                        <span>
-                            <Upload className="h-4 w-4" />
-                            Import
-                        </span>
-                    </Button>
-                </label>
-                <Button variant="outline" onClick={onExport}>
-                    <Download className="h-4 w-4" />
-                    Export
-                </Button>
+
                 <Button onClick={onAddClick}>
                     <Plus className="h-4 w-4" />
                     Add Ticket
                 </Button>
+                <SettingsDrawer />
                 <ModeToggle />
             </div>
         </div>
