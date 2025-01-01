@@ -33,7 +33,7 @@ jobs:
           override: true
           components: rustfmt, clippy
 
-        - name: Install dependencies (Ubuntu only)
+      - name: Install dependencies (Ubuntu only)
         if: ${{ matrix.platform == 'ubuntu-22.04' }}
         run: |
           sudo apt-get update
