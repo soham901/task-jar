@@ -1,6 +1,6 @@
 # Task-Jar
 
-Task-Jar is a lightweight, ticket tracking app designed for indie developers. Built with modern technologies, it offers a seamless and efficient way to manage tasks and projects for free. You can visit the site at [taskjar.vercel.app](https://taskjar.vercel.app) or install the Windows installer from the GitHub Releases.
+Task-Jar is a lightweight, ticket tracking app designed for indie developers. Built with modern technologies, it offers a seamless and efficient way to manage tasks and projects for free. You can visit the site at [taskjar.vercel.app](https://task-jar.vercel.app) or install the Windows installer from the GitHub Releases.
 
 ## Introduction
 
@@ -39,7 +39,7 @@ Task-Jar aims to simplify project management for individual developers and small
 
 - **Note**: The desktop app is only available for Windows at the moment.
 
-For the web version, you can visit the site at [taskjar.vercel.app](https://taskjar.vercel.app).
+For the web version, you can visit the site at [taskjar.vercel.app](https://task-jar.vercel.app).
 
 
 ## Usage
