@@ -107,6 +107,7 @@ export function useTickets() {
             };
             reader.readAsText(file);
         }
+        window.location.reload();
     };
 
     const handleLoadDemoData = async () => {
