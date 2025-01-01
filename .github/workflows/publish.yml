@@ -34,12 +34,7 @@ jobs:
           override: true
           components: rustfmt, clippy
 
-      - name: Add Rust targets (macOS only)
-        if: ${{ matrix.platform == 'macos-latest' }}
-        run: |
-          rustup target add aarch64-apple-darwin x86_64-apple-darwin
-
-      - name: Install dependencies (Ubuntu only)
+        - name: Install dependencies (Ubuntu only)
         if: ${{ matrix.platform == 'ubuntu-22.04' }}
         run: |
           sudo apt-get update
@@ -53,8 +48,8 @@ jobs:
         run: |
           VERSION=$(node -p "require('./package.json').version")
           echo "VERSION=$VERSION" >> $GITHUB_ENV
-          git tag "v$VERSION"
-          git push origin "v$VERSION"
+          git tag "app-v$VERSION"
+          git push origin "app-v$VERSION"
         shell: bash
 
       - name: Build and Publish with Tauri
@@ -62,8 +57,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tagName: app-v__VERSION__ # Automatically replaced by Tauri with the app version.
-          releaseName: 'App v__VERSION__'
+          tagName: app-v${{ env.VERSION }}
+          releaseName: 'App v${{ env.VERSION }}'
           releaseBody: 'See the assets to download this version and install.'
           releaseDraft: true
           prerelease: false
