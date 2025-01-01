@@ -51,10 +51,12 @@ export function SettingsDrawer() {
                                     />
                                     <Button
                                         variant="outline"
-                                        className="w-full flex items-center justify-center space-x-2"
+                                        className="w-full flex items-center justify-center space-x-2 cursor-pointer"
+                                        asChild
                                     >
-                                        <Upload className="h-4 w-4" />
-                                        <span>Import</span>
+                                        <span>
+                                            <Upload className="h-4 w-4" /> Import
+                                        </span>
                                     </Button>
                                 </label>
                                 <Button
