@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { TicketDB } from '@/lib/db';
-import { Ticket, TicketFilters } from '@/types/ticket';
+import { Ticket } from '@/types/ticket';
 import { sortTickets } from '@/utils/ticketUtils';
+import { useConfig } from './useConfig';
 
 const db = new TicketDB();
 
@@ -11,8 +12,8 @@ export function useTickets() {
     const [showDeleteDialog, setShowDeleteDialog] = useState(false);
     const [ticketToDelete, setTicketToDelete] = useState<string | null>(null);
     const [editingTicket, setEditingTicket] = useState<Ticket | undefined>();
-    const [filters, setFilters] = useState<TicketFilters>({ priority: '', phase: '', status: '' });
     const [search, setSearch] = useState('');
+    const { filters, setFilters } = useConfig();
 
     useEffect(() => {
         const loadTickets = async () => {
@@ -23,15 +24,17 @@ export function useTickets() {
         loadTickets();
     }, []);
 
-    const filteredTickets = tickets.filter(ticket => {
-        const matchesFilter = (!filters.priority || ticket.priority === filters.priority) &&
-            (!filters.phase || ticket.phase === filters.phase) &&
-            (!filters.status || ticket.status === filters.status);
-        const matchesSearch = ticket.title.toLowerCase().includes(search.toLowerCase()) ||
-            ticket.description.toLowerCase().includes(search.toLowerCase()) ||
-            ticket.id.toLowerCase().includes(search.toLowerCase());
-        return matchesFilter && matchesSearch;
-    });
+    const filteredTickets = useMemo(() => {
+        return tickets.filter(ticket => {
+            const matchesFilter = (!filters.priority || ticket.priority === filters.priority) &&
+                (!filters.phase || ticket.phase === filters.phase) &&
+                (!filters.status || ticket.status === filters.status);
+            const matchesSearch = ticket.title.toLowerCase().includes(search.toLowerCase()) ||
+                ticket.description.toLowerCase().includes(search.toLowerCase()) ||
+                ticket.id.toLowerCase().includes(search.toLowerCase());
+            return matchesFilter && matchesSearch;
+        });
+    }, [tickets, filters, search]);
 
     const handleAddOrUpdateTicket = async (ticket: Ticket) => {
         if (editingTicket) {
@@ -74,7 +77,6 @@ export function useTickets() {
     };
 
     const handleAddNewTicket = () => {
-        // Clear any existing editing ticket
         setEditingTicket(undefined);
         setShowForm(true)
     };
