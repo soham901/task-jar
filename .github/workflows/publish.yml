@@ -52,8 +52,10 @@ jobs:
         id: create_tag
         run: |
           VERSION=$(node -p "require('./package.json').version")
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
           git tag "v$VERSION"
           git push origin "v$VERSION"
+        shell: bash
 
       - name: Build and Publish with Tauri
         uses: tauri-apps/tauri-action@v0
