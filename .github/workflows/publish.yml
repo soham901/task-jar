@@ -13,9 +13,9 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - platform: 'ubuntu-22.04' # For Linux builds.
+          - platform: 'ubuntu-22.04'
             args: ''
-          - platform: 'windows-latest' # For Windows builds.
+          - platform: 'windows-latest'
             args: ''
 
     runs-on: ${{ matrix.platform }}
@@ -26,6 +26,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: lts/*
+
       - name: Install Rust stable
         uses: actions-rs/toolchain@v1
         with:
@@ -33,40 +34,26 @@ jobs:
           override: true
           components: rustfmt, clippy
 
+      - name: Add Rust targets (macOS only)
+        if: ${{ matrix.platform == 'macos-latest' }}
+        run: |
+          rustup target add aarch64-apple-darwin x86_64-apple-darwin
       - name: Install dependencies (Ubuntu only)
         if: ${{ matrix.platform == 'ubuntu-22.04' }}
         run: |
           sudo apt-get update
           sudo apt-get install -y libwebkit2gtk-4.0-dev libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
-
       - name: Install frontend dependencies
-        run: yarn install # Replace with npm, pnpm, or bun as needed.
-
-      - name: Create Git Tag
-        id: create_tag
-        run: |
-          VERSION=$(node -p "require('./package.json').version")
-          echo "VERSION=$VERSION" >> $GITHUB_ENV
-          git tag "app-v$VERSION"
-          git push origin "app-v$VERSION"
-        shell: bash
+        run: yarn install
 
       - name: Build and Publish with Tauri
         uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tagName: app-v${{ env.VERSION }}
-          releaseName: 'App v${{ env.VERSION }}'
+          tagName: app-v__VERSION__
+          releaseName: 'App v__VERSION__'
           releaseBody: 'See the assets to download this version and install.'
           releaseDraft: true
           prerelease: false
           args: ${{ matrix.args }}
-
-      - name: Upload Release Assets
-        uses: softprops/action-gh-release@v1
-        with:
-          files: |
-            ./src-tauri/target/release/bundle/**/*
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
