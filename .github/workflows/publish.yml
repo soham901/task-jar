@@ -14,7 +14,9 @@ jobs:
       matrix:
         include:
           - platform: 'ubuntu-22.04'
+          - platform: 'ubuntu-22.04'
             args: ''
+          - platform: 'windows-latest'
           - platform: 'windows-latest'
             args: ''
 
